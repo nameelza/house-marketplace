@@ -7,19 +7,21 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  
+
   return (
     <footer className="navbar">
       <nav className="navbarNav">
         <ul className="navbarListItems">
-          <li className="navbarListItem">
+          <li className="navbarListItem" onClick={() => navigate("/")}>
             <ExploreIcon width="36px" height="36px" />
             <p>Explore</p>
           </li>
-          <li className="navbarListItem">
+          <li className="navbarListItem" onClick={() => navigate("/offers")}>
             <OfferIcon width="36px" height="36px" />
             <p>Offers</p>
           </li>
-          <li className="navbarListItem">
+          <li className="navbarListItem" onClick={() => navigate("/profile")}>
             <PersonOutline width="36px" height="36px" />
             <p>Profile</p>
           </li>

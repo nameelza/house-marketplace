@@ -1,4 +1,5 @@
 import { useState } from "react";
+import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,13 +31,20 @@ function SignIn() {
               value={email}
               onChange={onChange}
             />
-            <input
-              type="password"
-              placeholder="Password"
-              id="password"
-              value={password}
-              onChange={onChange}
-            />
+            <div>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                id="password"
+                value={password}
+                onChange={onChange}
+              />
+              <img
+                src={visibilityIcon}
+                alt="show password"
+                onClick={() => setShowPassword((prevState) => !prevState)}
+              />
+            </div>
           </form>
         </main>
       </div>

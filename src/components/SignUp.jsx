@@ -33,13 +33,13 @@ function SignUp() {
 
     try {
       const auth = getAuth();
-      const userCredentials = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      const user = userCredentials.user;
+      const user = userCredential.user;
 
       updateProfile(auth.currentUser, {
         displayName: name,

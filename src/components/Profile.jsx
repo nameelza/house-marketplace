@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, upadateProfile } from "firebase/auth";
-import { updateDoc } from "firebase/firestore";
+import { getAuth, updateProfile } from "firebase/auth";
+import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.config";
+import { toast } from "react-toastify";
 
 function Profile() {
   const auth = getAuth();
@@ -21,8 +22,22 @@ function Profile() {
     navigate("/");
   };
 
-  const onSubmit = () => {
-    console.log("change");
+  const onSubmit = async () => {
+    try {
+      if (auth.currentUser.displayName !== name) {
+        // Update display name in firebase
+        await updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+        // Update name in firestore
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+          name,
+        });
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again");
+    }
   };
 
   const onChange = (e) => {

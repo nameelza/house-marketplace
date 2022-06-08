@@ -41,6 +41,7 @@ function SignIn() {
               className="passwordInput"
               placeholder="Password"
               id="password"
+              autoComplete="true"
               value={password}
               onChange={onChange}
             />

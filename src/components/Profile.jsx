@@ -40,9 +40,10 @@ function Profile() {
           Log Out
         </button>
       </header>
+
       <main>
-        <div>
-          <p>Personal Details</p>
+        <div className="profileDetailsHeader">
+          <p className="profileDetailsText">Personal Details</p>
           <p
             className="changePersonalDetails"
             onClick={() => {
@@ -53,6 +54,7 @@ function Profile() {
             {changeDetails ? "done" : "change"}
           </p>
         </div>
+
         <div className="profileCard">
           <form>
             <input
@@ -61,6 +63,14 @@ function Profile() {
               className={changeDetails ? "profileNameActive" : "profileName"}
               disabled={!changeDetails}
               value={name}
+              onChange={onChange}
+            />
+            <input
+              type="text"
+              id="email"
+              className={changeDetails ? "profileEmailActive" : "profileEmail"}
+              disabled={!changeDetails}
+              value={email}
               onChange={onChange}
             />
           </form>

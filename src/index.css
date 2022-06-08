@@ -222,7 +222,7 @@ button {
 .signUpBar {
   margin-top: 3rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   position: inherit;
 }
@@ -232,12 +232,6 @@ button {
 .signInText,
 .signUpText {
   cursor: pointer;
-}
-@media (min-width: 1024px) {
-  .signInBar,
-  .signUpBar {
-    justify-content: start;
-  }
 }
 
 .signInText,
@@ -255,12 +249,7 @@ button {
   height: 3rem;
   background-color: #00cc66;
   border-radius: 50%;
-}
-@media (min-width: 1024px) {
-  .signInButton,
-  .signUpButton {
-    margin-left: 3rem;
-  }
+  margin-left: 3rem;
 }
 
 .socialLogin {

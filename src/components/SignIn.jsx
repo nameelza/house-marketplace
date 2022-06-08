@@ -22,20 +22,22 @@ function SignIn() {
     <>
       <div className="pageContainer">
         <header>
-          <p>Welcome back!</p>
+          <p className="pageHeader">Welcome back!</p>
         </header>
         <main>
           <form>
             <input
               type="email"
+              className="emailInput"
               placeholder="Email"
               id="email"
               value={email}
               onChange={onChange}
             />
-            <div>
+            <div className="passwordInputDiv">
               <input
                 type={showPassword ? "text" : "password"}
+                className="passwordInput"
                 placeholder="Password"
                 id="password"
                 value={password}
@@ -44,12 +46,13 @@ function SignIn() {
               <img
                 src={visibilityIcon}
                 alt="show password"
+                className="showPassword"
                 onClick={() => setShowPassword((prevState) => !prevState)}
               />
             </div>
 
             <Link to="/forgot-password" className="forgotPasswordLink">
-              Forgot Password?
+              Forgot Password
             </Link>
 
             <div className="signInBar">
@@ -59,7 +62,9 @@ function SignIn() {
               </button>
             </div>
           </form>
+
           {/* Google OAuth */}
+
           <Link to="/sign-up" className="registerLink">
             Sign Up Instead
           </Link>

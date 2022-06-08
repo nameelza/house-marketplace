@@ -23,7 +23,7 @@ function SignUp() {
     <>
       <div className="pageContainer">
         <header>
-          <p className="pageHeader">Welcome!</p>
+          <p className="pageHeader">Welcome to House Marketplace!</p>
         </header>
 
         <form>
@@ -63,9 +63,9 @@ function SignUp() {
             />
           </div>
 
-          <div className="signInBar">
-            <p className="signInText">Sign Up</p>
-            <button className="signInButton">
+          <div className="signUpBar">
+            <p className="signUpText">Sign Up</p>
+            <button className="signUpButton">
               <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
             </button>
           </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -18,11 +18,35 @@ function SignUp() {
   });
   const { name, email, password } = inputData;
 
+  const navigate = useNavigate();
+
   const onChange = (e) => {
     setInputData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredentials.user;
+
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -32,7 +56,7 @@ function SignUp() {
           <p className="pageHeader">Welcome to House Marketplace!</p>
         </header>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <input
             type="text"
             className="nameInput"
@@ -57,6 +81,7 @@ function SignUp() {
               className="passwordInput"
               placeholder="Password"
               id="password"
+              autoComplete="true"
               value={password}
               onChange={onChange}
             />

@@ -34,7 +34,7 @@ function SignIn() {
             value={email}
             onChange={onChange}
           />
-          
+
           <div className="passwordInputDiv">
             <input
               type={showPassword ? "text" : "password"}
@@ -53,7 +53,7 @@ function SignIn() {
               onClick={() => setShowPassword((prevState) => !prevState)}
             />
           </div>
-
+          
           <Link to="/forgot-password" className="forgotPasswordLink">
             Forgot Password
           </Link>

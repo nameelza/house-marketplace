@@ -10,6 +10,7 @@ function Profile() {
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
   });
+  const [changeDetails, setChangeDetails] = useState(false);
 
   const { name, email } = formData;
 
@@ -20,6 +21,10 @@ function Profile() {
     navigate("/");
   };
 
+  const onSubmit = () => {
+    console.log("change");
+  };
+
   return (
     <div className="profile">
       <header className="profileHeader">
@@ -28,6 +33,20 @@ function Profile() {
           Log Out
         </button>
       </header>
+      <main>
+        <div>
+          <p>Personal Details</p>
+          <p
+            className="changePersonalDetails"
+            onClick={() => {
+              changeDetails && onSubmit();
+              setChangeDetails((prevState) => !prevState);
+            }}
+          >
+            {changeDetails ? "done" : "change"}
+          </p>
+        </div>
+      </main>
     </div>
   );
 }

@@ -59,6 +59,14 @@ function Category() {
       <header>
         <p className="pageHeader">Places for {params.categoryName}</p>
       </header>
+
+      {loading ? (
+        <Spinner />
+      ) : listings && listings.length > 0 ? (
+        <></>
+      ) : (
+        <p>No listings for {params.categoryName}</p>
+      )}
     </div>
   );
 }

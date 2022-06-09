@@ -11,7 +11,10 @@ function OAth() {
 
   return (
     <div className="socialLogin">
-      <p>Sign {location.pathname === "/sign-in" ? "In" : "Up"}</p>
+      <p>Sign {location.pathname === "/sign-in" ? "in" : "up"} with</p>
+      <button className="socialIconDiv">
+        <img src={googleIcon} className="socialIconImg" alt="google icon" />
+      </button>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import Spinner from "./Spinner";
 function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
+  console.log(listings);
 
   const params = useParams();
 
@@ -53,7 +54,13 @@ function Category() {
     fetchListings();
   }, []);
 
-  return <div>Category</div>;
+  return (
+    <div className="category">
+      <header>
+        <p className="pageHeader">Places for {params.categoryName}</p>
+      </header>
+    </div>
+  );
 }
 
 export default Category;

@@ -1,6 +1,8 @@
-import { useState, Link } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -33,7 +35,9 @@ function ForgotPassword() {
             value={email}
             onChange={onChange}
           />
-          {/* <Link to="/sign-in" className="forgotPasswordLink">Back to Sign In</Link> */}
+          <Link to="/sign-in" className="forgotPasswordLink">
+            Back to Sign In
+          </Link>
 
           <div className="signInbar">
             <div className="signInText">Send Reset Link</div>

@@ -24,6 +24,7 @@ function Category() {
       try {
         // Get reference
         const listingsRef = collection(db, "listings");
+
         // Create query
         const q = query(
           listingsRef,
@@ -31,9 +32,22 @@ function Category() {
           orderBy("timestamp", "desc"),
           limit(10)
         );
+
+        // Execute query
+        const querySnap = await getDocs(q);
+
+        let listings = [];
+
+        querySnap.forEach((doc) => {
+          return listings.push({
+            id: doc.id,
+            data: doc.data,
+          });
+        });
       } catch (error) {}
     };
-  });
+    fetchListings();
+  }, []);
 
   return <div>Category</div>;
 }

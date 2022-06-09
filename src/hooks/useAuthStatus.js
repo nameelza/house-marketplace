@@ -14,6 +14,6 @@ export const useAuthStatus = () => {
       setLoading(false);
     });
   });
-  
+
   return { loggedIn, loading };
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Link } from "react";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -18,15 +18,16 @@ function ForgotPassword() {
         <p className="pageHeader">Forgot Password</p>
       </header>
       <main>
-        <form onSubmit={onSubmit}>
+        <form>
           <input
-            type="text"
+            type="email"
             className="emailInput"
             placeholder="Email"
             id="email"
             value={email}
             onChange={onChange}
           />
+          {/* <Link to="/sign-in">Back to Sign In</Link> */}
         </form>
       </main>
     </div>

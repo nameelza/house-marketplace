@@ -36,7 +36,7 @@ function Category() {
         // Execute query
         const querySnap = await getDocs(q);
 
-        let listings = [];
+        const listings = [];
 
         querySnap.forEach((doc) => {
           return listings.push({
@@ -44,7 +44,11 @@ function Category() {
             data: doc.data,
           });
         });
-      } catch (error) {}
+        setListings(listings);
+        setLoading(false);
+      } catch (error) {
+        toast.error("Could not fetch listings");
+      }
     };
     fetchListings();
   }, []);

@@ -28,7 +28,10 @@ function OAth() {
           timestamp: serverTimestamp(),
         });
       }
-    } catch (error) {}
+      navigate("/");
+    } catch (error) {
+      toast.error("Could not authorize with Google");
+    }
   };
 
   return (

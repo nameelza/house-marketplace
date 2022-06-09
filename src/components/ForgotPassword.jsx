@@ -40,9 +40,9 @@ function ForgotPassword() {
             Back to Sign In
           </Link>
 
-          <div className="signInbar">
+          <div className="signInBar">
             <div className="signInText">Send Reset Link</div>
-            <button>
+            <button className="signInButton">
               <ArrowRightIcon fill="#ffffff" width="34px" heigth="34px" />
             </button>
           </div>

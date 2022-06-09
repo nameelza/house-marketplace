@@ -1,7 +1,7 @@
 function OAth() {
   return (
     <>
-      <h1>s</h1>
+      <h1>OAth</h1>
     </>
   );
 }

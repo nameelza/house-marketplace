@@ -30,6 +30,14 @@ function ListingItem({ listing, id }) {
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             {listing.type === "rent" && " / month"}
           </p>
+          <div className="categoryListingInfoDiv">
+            <img src={bedIcon} alt="bed" />
+            <p className="categoryListingInfoText">
+              {listing.berdooms === 1
+                ? "1 Bedroom"
+                : `${listing.bedrooms} Bedrooms`}
+            </p>
+          </div>
         </div>
       </Link>
     </li>

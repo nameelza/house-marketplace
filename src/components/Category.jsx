@@ -12,6 +12,7 @@ import {
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
+import ListingItem from "./ListingItem";
 
 function Category() {
   const [listings, setListings] = useState(null);
@@ -47,7 +48,6 @@ function Category() {
 
         setListings(listings);
         setLoading(false);
-
       } catch (error) {
         toast.error("Could not fetch listings");
       }
@@ -68,7 +68,11 @@ function Category() {
           <main>
             <ul className="categoryListings">
               {listings.map((listing) => (
-                <h3 key={listing.id}>{listing.data.name}</h3>
+                <ListingItem
+                  key={listing.id}
+                  id={listing.id}
+                  listing={listing.data}
+                />
               ))}
             </ul>
           </main>

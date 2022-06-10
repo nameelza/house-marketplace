@@ -16,7 +16,6 @@ import Spinner from "./Spinner";
 function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(listings);
 
   const params = useParams();
 
@@ -42,11 +41,13 @@ function Category() {
         querySnap.forEach((doc) => {
           return listings.push({
             id: doc.id,
-            data: doc.data,
+            data: doc.data(),
           });
         });
+
         setListings(listings);
         setLoading(false);
+
       } catch (error) {
         toast.error("Could not fetch listings");
       }
@@ -63,7 +64,15 @@ function Category() {
       {loading ? (
         <Spinner />
       ) : listings && listings.length > 0 ? (
-        <></>
+        <>
+          <main>
+            <ul className="categoryListings">
+              {listings.map((listing) => (
+                <h3 key={listing.id}>{listing.data.name}</h3>
+              ))}
+            </ul>
+          </main>
+        </>
       ) : (
         <p>No listings for {params.categoryName}</p>
       )}

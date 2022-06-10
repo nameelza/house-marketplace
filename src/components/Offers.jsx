@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import {
   collection,
   getDocs,
@@ -18,8 +17,6 @@ function Offers() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const params = useParams();
-
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -29,7 +26,7 @@ function Offers() {
         // Create query
         const q = query(
           listingsRef,
-          where("type", "==", params.categoryName),
+          where("offer", "==", true),
           orderBy("timestamp", "desc"),
           limit(10)
         );
@@ -53,12 +50,12 @@ function Offers() {
       }
     };
     fetchListings();
-  }, [params.categoryName]);
+  }, []);
 
   return (
     <div className="category">
       <header>
-        <p className="pageHeader">Places for {params.categoryName}</p>
+        <p className="pageHeader">Offers</p>
       </header>
 
       {loading ? (
@@ -78,7 +75,7 @@ function Offers() {
           </main>
         </>
       ) : (
-        <p>No listings for {params.categoryName}</p>
+        <p>No current offers</p>
       )}
     </div>
   );

@@ -203,6 +203,17 @@ function CreateListing() {
             >
               Yes
             </button>
+            <button
+              className={
+                !offer && offer !== null ? "formButtonActive" : "formButton"
+              }
+              type="button"
+              id="offer"
+              value={false}
+              onClick={onMutate}
+            >
+              Yes
+            </button>
           </div>
         </form>
       </main>

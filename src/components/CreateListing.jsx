@@ -52,7 +52,7 @@ function CreateListing() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
@@ -68,7 +68,23 @@ function CreateListing() {
       return;
     }
 
-    console.log("jj");
+    let geolocation = {};
+    let location;
+
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyA6O8u0SCWNzOr8sd-J8TmZm6z1x8v5eno`
+    );
+
+    const data = await response.json();
+    setLoading(false);
+
+    geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
+    geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
+
+    location =
+      data.status === "ZERO RESULTS"
+        ? undefined
+        : data.results[0]?.formatted_address;
   };
 
   const onMutate = (e) => {

@@ -223,6 +223,7 @@ function CreateListing() {
               type="number"
               id="regularPrice"
               value={regularPrice}
+              onChange={onMutate}
               min="50"
               max="75000000"
               required

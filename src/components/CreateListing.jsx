@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 
 function CreateListing() {
+  const [laoding, setLoading] = useState(false);
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [formData, setFormData] = useState({
     type: "rent",
@@ -21,6 +22,21 @@ function CreateListing() {
     longitude: 0,
   });
 
+  const {
+    type,
+    name,
+    bedrooms,
+    bathrooms,
+    parking,
+    furnished,
+    offer,
+    regularPrice,
+    discountedPrice,
+    images,
+    latitude,
+    longitude,
+  } = formData;
+
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -35,7 +51,15 @@ function CreateListing() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div>Create</div>;
+  return laoding ? (
+    <Spinner />
+  ) : (
+    <div className="profile">
+      <header>
+        <p className="pageHeader">Create a Listing</p>
+      </header>
+    </div>
+  );
 }
 
 export default CreateListing;

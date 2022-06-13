@@ -227,6 +227,7 @@ function CreateListing() {
               max="75000000"
               required
             />
+            {type === "rent" && <p className="formPriceText">$ / Month</p>}
           </div>
         </form>
       </main>

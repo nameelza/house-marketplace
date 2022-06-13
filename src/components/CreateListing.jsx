@@ -230,6 +230,22 @@ function CreateListing() {
             />
             {type === "rent" && <p className="formPriceText">$ / Month</p>}
           </div>
+
+          {offer && (
+            <>
+              <label className="formLabel">Discounted Price</label>
+              <input
+                className="formInputSmall"
+                type="number"
+                id="discountedPrice"
+                value={discountedPrice}
+                onChange={onMutate}
+                min="50"
+                max="75000000"
+                required={offer}
+              />
+            </>
+          )}
         </form>
       </main>
     </div>

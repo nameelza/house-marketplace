@@ -143,9 +143,37 @@ function CreateListing() {
               Yes
             </button>
             <button
-              className={!parking ? "formButtonActive" : "formButton"}
+              className={
+                !parking && parking !== null ? "formButtonActive" : "formButton"
+              }
               type="button"
               id="parking"
+              value={false}
+              onClick={onMutate}
+            >
+              No
+            </button>
+          </div>
+
+          <label className="formLabel">Furnished</label>
+          <div className="formButtons">
+            <button
+              className={furnished ? "formButtonActive" : "formButton"}
+              type="button"
+              id="furnished"
+              value={true}
+              onClick={onMutate}
+            >
+              Yes
+            </button>
+            <button
+              className={
+                !furnished && furnished !== "null"
+                  ? "formButtonActive"
+                  : "formButton"
+              }
+              type="button"
+              id="furnished"
               value={false}
               onClick={onMutate}
             >

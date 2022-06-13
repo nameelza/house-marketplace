@@ -85,6 +85,12 @@ function CreateListing() {
       data.status === "ZERO RESULTS"
         ? undefined
         : data.results[0]?.formatted_address;
+
+    if (location === undefined || location.includes("undefined")) {
+      setLoading(false);
+      toast.error("Please enter a correct address");
+      return;
+    }
   };
 
   const onMutate = (e) => {

@@ -191,6 +191,19 @@ function CreateListing() {
             onChange={onMutate}
             required
           />
+
+          <label className="formLabel">Offer</label>
+          <div className="formButtons">
+            <button
+              className={offer ? "formButtonActive" : "formButton"}
+              type="button"
+              id="offer"
+              value={true}
+              onClick={onMutate}
+            >
+              Yes
+            </button>
+          </div>
         </form>
       </main>
     </div>

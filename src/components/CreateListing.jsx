@@ -29,6 +29,7 @@ function CreateListing() {
     bathrooms,
     parking,
     furnished,
+    address,
     offer,
     regularPrice,
     discountedPrice,
@@ -180,6 +181,16 @@ function CreateListing() {
               No
             </button>
           </div>
+
+          <label className="formLabel">Address</label>
+          <textarea
+            className="formInputAddress"
+            type="text"
+            id="address"
+            value={address}
+            onChange={onMutate}
+            required
+          />
         </form>
       </main>
     </div>

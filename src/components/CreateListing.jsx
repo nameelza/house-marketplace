@@ -28,9 +28,12 @@ function CreateListing() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setFormData({ ...formData, userRef: user.uid });
+      } else {
+        navigate("/sign-in");
       }
     });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <div>Create</div>;
 }

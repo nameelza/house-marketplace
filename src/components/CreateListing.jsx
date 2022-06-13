@@ -9,6 +9,7 @@ import {
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 import Spinner from "./Spinner";
 
 function CreateListing() {
@@ -98,6 +99,16 @@ function CreateListing() {
       toast.error("Please enter a correct address");
       return;
     }
+
+    const storeImage = async (image) => {
+      return new Promise((resolve, reject) => {
+        const storage = getStorage();
+        const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
+
+        const storageRef = ref(storage, "images/" + fileName);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+      });
+    };
   };
 
   const onMutate = (e) => {

@@ -114,6 +114,19 @@ function CreateListing() {
                 required
               />
             </div>
+            <div>
+              <label className="formLabel">Bathrooms</label>
+              <input
+                className="formInputSmall"
+                type="number"
+                id="bathrooms"
+                value={bathrooms}
+                onChange={onMutate}
+                min="0"
+                max="50"
+                required
+              />
+            </div>
           </div>
         </form>
       </main>

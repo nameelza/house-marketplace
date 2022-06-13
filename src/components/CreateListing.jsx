@@ -212,8 +212,21 @@ function CreateListing() {
               value={false}
               onClick={onMutate}
             >
-              Yes
+              No
             </button>
+          </div>
+
+          <label className="formLabel">Regular Price</label>
+          <div className="formPriceDiv">
+            <input
+              className="formInputSmall"
+              type="number"
+              id="regularPrice"
+              value={regularPrice}
+              min="50"
+              max="75000000"
+              required
+            />
           </div>
         </form>
       </main>

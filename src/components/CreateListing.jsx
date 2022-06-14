@@ -26,8 +26,6 @@ function CreateListing() {
     regularPrice: 0,
     discountedPrice: 0,
     images: {},
-    latitude: 0,
-    longitude: 0,
   });
 
   const {
@@ -42,8 +40,6 @@ function CreateListing() {
     regularPrice,
     discountedPrice,
     images,
-    latitude,
-    longitude,
   } = formData;
 
   const auth = getAuth();
@@ -84,7 +80,6 @@ function CreateListing() {
     );
 
     const data = await response.json();
-    setLoading(false);
 
     geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
     geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
@@ -100,15 +95,16 @@ function CreateListing() {
       return;
     }
 
+    // Store image in firebase
     const storeImage = async (image) => {
       return new Promise((resolve, reject) => {
         const storage = getStorage();
         const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
 
         const storageRef = ref(storage, "images/" + fileName);
+
         const uploadTask = uploadBytesResumable(storageRef, image);
 
-        // Listen for state changes, errors, and completion of the upload.
         uploadTask.on(
           "state_changed",
           (snapshot) => {
@@ -130,6 +126,8 @@ function CreateListing() {
             reject(error);
           },
           () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               resolve(downloadURL);
             });
@@ -137,6 +135,18 @@ function CreateListing() {
         );
       });
     };
+
+    const imgUrls = await Promise.all(
+      [...images].map((image) => storeImage(image))
+    ).catch(() => {
+      setLoading(false);
+      toast.error("Images not uploaded");
+      return;
+    });
+
+    console.log(imgUrls);
+
+    setLoading(false);
   };
 
   const onMutate = (e) => {

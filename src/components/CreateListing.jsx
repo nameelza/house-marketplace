@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import Spinner from "./Spinner";
 
 function CreateListing() {
-  const [laoding, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
     name: "",
@@ -139,18 +139,17 @@ function CreateListing() {
     const imgUrls = await Promise.all(
       [...images].map((image) => {
         if (image.size > 2097152) {
-          return toast.error("Images must be less than 2MB size")
+          return toast.error("Images must be less than 2mb each");
         } else {
           return storeImage(image);
         }
       })
-    ).catch(() => {
+    ).catch((error) => {
+      console.log(error);
       setLoading(false);
       toast.error("Images not uploaded");
       return;
     });
-
-    console.log(imgUrls);
 
     setLoading(false);
   };
@@ -182,7 +181,7 @@ function CreateListing() {
     }
   };
 
-  return laoding ? (
+  return loading ? (
     <Spinner />
   ) : (
     <div className="profile">
@@ -372,7 +371,8 @@ function CreateListing() {
           )}
 
           <label className="formLabel">Images</label>
-          <p>The first image will be the cover (max 6).</p>
+          <p>The first image will be the cover (max 6)</p>
+          <p>Max image size 2mb</p>
           <input
             className="formInputFile"
             type="file"

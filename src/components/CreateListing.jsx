@@ -6,6 +6,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -136,7 +137,7 @@ function CreateListing() {
       });
     };
 
-    const imgUrls = await Promise.all(
+    const imageUrls = await Promise.all(
       [...images].map((image) => {
         if (image.size > 2097152) {
           return toast.error("Images must be less than 2mb each");
@@ -150,6 +151,18 @@ function CreateListing() {
       toast.error("Images not uploaded");
       return;
     });
+
+    const formDataCopy = {
+      ...formData,
+      imageUrls,
+      geolocation,
+      timestamp: serverTimestamp(),
+    };
+
+    delete formDataCopy.images;
+    delete formDataCopy.address;
+    location && (formDataCopy.location = location);
+    !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
     setLoading(false);
   };

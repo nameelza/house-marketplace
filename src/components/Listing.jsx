@@ -44,6 +44,9 @@ function Listing() {
       >
         <img src={shareIcon} alt="share" />
       </div>
+
+      {shareLinkCopied && <p className="linkCopied">Link Copied!</p>}
+      
       <h1>{listing.name}</h1>
     </main>
   );

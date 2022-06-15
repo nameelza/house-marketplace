@@ -12,7 +12,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import ForgotPassword from "./components/ForgotPassword";
 import CreateListing from "./components/CreateListing";
-import Contact from "./components/Category";
+import Contact from "./components/Contact";
 
 function App() {
   return (

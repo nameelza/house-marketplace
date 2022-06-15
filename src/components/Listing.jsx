@@ -4,10 +4,11 @@ import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
 import Spinner from "../components/Spinner";
+import shareIcon from "../assets/svg/shareIcon.svg";
 
 function Listing() {
   const [listing, setListing] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
   const navigate = useNavigate();
@@ -18,15 +19,34 @@ function Listing() {
       const docRef = doc(db, "listings", params.listingId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log(docSnap.data());
         setListing(docSnap.data());
+        setLoading(false);
       }
     };
 
     fetchListing();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return <div>{listing.name}</div>;
+  return loading ? (
+    <Spinner />
+  ) : (
+    <main>
+      {/* Slideshow */}
+      <div
+        className="shareIconDiv"
+        onClick={() => {
+          navigator.clipboard.writeText(window.location.href);
+          setShareLinkCopied(true);
+          setTimeout(() => {
+            setShareLinkCopied(false);
+          }, 2000);
+        }}
+      >
+        <img src={shareIcon} alt="share" />
+      </div>
+      <h1>{listing.name}</h1>
+    </main>
+  );
 }
 
 export default Listing;

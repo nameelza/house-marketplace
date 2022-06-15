@@ -62,6 +62,15 @@ function Listing() {
         <p className="listingType">
           For {listing.type === "rent" ? "Rent" : "Sale"}
         </p>
+        {listing.offer && (
+          <p className="discountPrice">
+            $
+            {(listing.regularPrice - listing.discountedPrice)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+            discount
+          </p>
+        )}
       </div>
     </main>
   );

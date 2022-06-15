@@ -138,15 +138,8 @@ function CreateListing() {
     };
 
     const imageUrls = await Promise.all(
-      [...images].map((image) => {
-        if (image.size > 2097152) {
-          return toast.error("Images must be less than 2mb each");
-        } else {
-          return storeImage(image);
-        }
-      })
-    ).catch((error) => {
-      console.log(error);
+      [...images].map((image) => storeImage(image))
+    ).catch(() => {
       setLoading(false);
       toast.error("Images not uploaded");
       return;

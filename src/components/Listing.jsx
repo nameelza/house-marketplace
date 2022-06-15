@@ -71,6 +71,18 @@ function Listing() {
             discount
           </p>
         )}
+        <ul className="listingDetailsList">
+          <li>
+            {listing.bedrooms === 1
+              ? "1 Bedroom"
+              : `${listing.bedrooms} Bedrooms`}
+          </li>
+          <li>
+            {listing.bathrooms === 1
+              ? "1 Bathrooms"
+              : `${listing.bathrooms} Bathrooms`}
+          </li>
+        </ul>
       </div>
     </main>
   );

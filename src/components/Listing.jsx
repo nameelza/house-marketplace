@@ -46,8 +46,18 @@ function Listing() {
       </div>
 
       {shareLinkCopied && <p className="linkCopied">Link Copied!</p>}
-      
-      <h1>{listing.name}</h1>
+      <div>
+        <p>
+          {listing.name} - $
+          {listing.offer
+            ? listing.discountedPrice
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            : listing.regularPrice
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </p>
+      </div>
     </main>
   );
 }

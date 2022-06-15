@@ -24,8 +24,9 @@ function Listing() {
     };
 
     fetchListing();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return <div>listing</div>;
+  return <div>{listing.name}</div>;
 }
 
 export default Listing;

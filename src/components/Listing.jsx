@@ -27,6 +27,7 @@ function Listing() {
     fetchListing();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return loading ? (
     <Spinner />
   ) : (
@@ -46,8 +47,8 @@ function Listing() {
       </div>
 
       {shareLinkCopied && <p className="linkCopied">Link Copied!</p>}
-      <div>
-        <p>
+      <div className="listingDetails">
+        <p className="listingName">
           {listing.name} - $
           {listing.offer
             ? listing.discountedPrice
@@ -57,6 +58,7 @@ function Listing() {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </p>
+        <p className="listingLocation">{listing.location}</p>
       </div>
     </main>
   );

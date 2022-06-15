@@ -82,6 +82,8 @@ function Listing() {
               ? "1 Bathrooms"
               : `${listing.bathrooms} Bathrooms`}
           </li>
+          <li>{listing.parking && "Parking Spot"}</li>
+          <li>{listing.furnished && "Furnished"}</li>
         </ul>
       </div>
     </main>

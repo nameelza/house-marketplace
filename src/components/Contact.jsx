@@ -19,8 +19,19 @@ function Contact() {
       }
     };
     getLandlord();
-  }, []);
-  return <div>Contact</div>;
+  }, [params.landlordId]);
+  return (
+    <div className="pageContainer">
+      <header className="pageHeader">Contact Landlord</header>
+      {landlord !== null && (
+        <main>
+          <div className="contactLandlord">
+            <p className="landlordName">Contact {landlord.name}</p>
+          </div>
+        </main>
+      )}
+    </div>
+  );
 }
 
 export default Contact;

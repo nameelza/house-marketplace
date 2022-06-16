@@ -47,8 +47,14 @@ function Contact() {
                 required
               />
             </div>
-            <a href={`mailto:${landlord.email}?Subject=${searchParams.get("listingName")}&body=${message}}`}>
-              <button type="button">Send message</button>
+            <a
+              href={`mailto:${landlord.email}?Subject=${searchParams.get(
+                "listingName"
+              )}&body=${message}`}
+            >
+              <button type="button" className="primaryButton">
+                Send Message
+              </button>
             </a>
           </form>
         </main>

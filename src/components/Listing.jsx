@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { MapContainer, Popup, Marker, TileLayer } from "react-leaflet";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import "swiper/css/bundle";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
@@ -41,9 +41,7 @@ function Listing() {
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         slidesPerView={1}
-        navigation
         pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
       >
         {listing.imageUrls.map((url, index) => (
           <SwiperSlide key={index}>

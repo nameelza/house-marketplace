@@ -100,8 +100,9 @@ function Listing() {
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker
               position={[listing.geolocation.lat, listing.geolocation.lng]}
-            />
-            {/* <Popup>{listing.location}</Popup> */}
+            >
+            <Popup>{listing.location}</Popup>
+            </Marker>
           </MapContainer>
         </div>
 

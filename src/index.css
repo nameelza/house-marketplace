@@ -315,10 +315,16 @@ button {
 
 .swiperSlideDiv {
   height: 400px;
+  position: relative;
 }
 
 .swiperSlideHome {
   height: 200px;
+  position: relative;
+}
+
+.swiperSlideHome:hover {
+  cursor: pointer;
 }
 
 .swiperSlide {

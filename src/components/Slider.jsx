@@ -34,9 +34,24 @@ function Slider() {
     fetchListings();
   }, []);
 
-  console.log(listings);
+  return loading ? (
+    <Spinner />
+  ) : (
+    listings && (
+      <>
+        <p className="exploreHeading">Recommended</p>
 
-  return <div>Slider</div>;
+        <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+          {listings.map(({ data, id }) => (
+            <SwiperSlide
+              key={id}
+              onClick={() => navigate(`/category/${data.type}/${id}`)}
+            ></SwiperSlide>
+          ))}
+        </Swiper>
+      </>
+    )
+  );
 }
 
 export default Slider;

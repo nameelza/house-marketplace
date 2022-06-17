@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MapContainer, Popup, Marker, TileLayer } from "react-leaflet";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
@@ -34,7 +37,9 @@ function Listing() {
     <Spinner />
   ) : (
     <main>
-      {/* Slideshow */}
+      <Swiper slidesPerView={1}>
+
+      </Swiper>
       <div
         className="shareIconDiv"
         onClick={() => {
@@ -101,7 +106,7 @@ function Listing() {
             <Marker
               position={[listing.geolocation.lat, listing.geolocation.lng]}
             >
-            <Popup>{listing.location}</Popup>
+              <Popup>{listing.location}</Popup>
             </Marker>
           </MapContainer>
         </div>

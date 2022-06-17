@@ -23,13 +23,18 @@ function Slider() {
       querySnap.forEach((doc) => {
         return listings.push({
           id: doc.id,
-          data: doc.data,
+          data: doc.data(),
         });
       });
+
+      setListings(listings);
+      setLoading(false);
     };
 
     fetchListings();
   }, []);
+
+  console.log(listings);
 
   return <div>Slider</div>;
 }

@@ -8,6 +8,29 @@ import "swiper/css/bundle";
 import Spinner from "./Spinner";
 
 function Slider() {
+  const [loading, setLoading] = useState(true);
+  const [listings, setListings] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      const listingsRef = collection(db, "listings");
+      const q = query(listingsRef, orderBy("timestamp", "desc"), limit(5));
+      const querySnap = await getDocs(q);
+
+      let listings = [];
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data,
+        });
+      });
+    };
+
+    fetchListings();
+  }, []);
+
   return <div>Slider</div>;
 }
 

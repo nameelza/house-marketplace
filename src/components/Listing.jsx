@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MapContainer, Popup, Marker, TileLayer } from "react-leaflet";
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { getDoc, doc } from "firebase/firestore";
@@ -37,10 +37,15 @@ function Listing() {
     <Spinner />
   ) : (
     <main>
-      <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        navigation
+      >
         {listing.imageUrls.map((url, index) => (
           <SwiperSlide key={index}>
-            <img src={url} className="swiperSlideDiv" alt={listing.name} />
+            <img src={url} className="swiperSlide" alt={listing.name} />
           </SwiperSlide>
         ))}
       </Swiper>

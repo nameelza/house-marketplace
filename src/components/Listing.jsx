@@ -15,7 +15,8 @@ function Listing() {
   const [loading, setLoading] = useState(true);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
-  // const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
+  const navigate = useNavigate();
   const params = useParams();
   const auth = getAuth();
 
@@ -40,12 +41,15 @@ function Listing() {
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         slidesPerView={1}
-        pagination={{ clickable: true }}
         navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
       >
         {listing.imageUrls.map((url, index) => (
           <SwiperSlide key={index}>
-            <img src={url} className="swiperSlide" alt={listing.name} />
+            <div className="swiperSlideDiv">
+              <img src={url} className="swiperSlide" alt={listing.name} />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

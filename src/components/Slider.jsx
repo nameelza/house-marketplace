@@ -41,12 +41,24 @@ function Slider() {
       <>
         <p className="exploreHeading">Recommended</p>
 
-        <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+        >
           {listings.map(({ data, id }) => (
             <SwiperSlide
               key={id}
               onClick={() => navigate(`/category/${data.type}/${id}`)}
-            ></SwiperSlide>
+            >
+              <div className="swiperSlideHome">
+                <img
+                  src={data.imageUrls[0]}
+                  className="swiperSlide"
+                  alt={data.name}
+                />
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </>

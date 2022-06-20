@@ -88,6 +88,12 @@ function Profile() {
     }));
   };
 
+  const onDelete = async (listingId) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      await deleteDoc(doc(db, "listings", listingId));
+    }
+  };
+
   return (
     <div className="profile">
       <header className="profileHeader">
@@ -147,7 +153,7 @@ function Profile() {
                   key={listing.id}
                   listing={listing.data}
                   id={listing.id}
-                  onDelete={() => console.log("delete")}
+                  onDelete={() => onDelete(listing.id)}
                 />
               ))}
             </ul>

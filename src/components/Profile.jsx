@@ -5,7 +5,7 @@ import {
   updateDoc,
   doc,
   collection,
-  getDoc,
+  getDocs,
   query,
   where,
   orderBy,
@@ -18,18 +18,20 @@ import homeIcon from "../assets/svg/homeIcon.svg";
 
 function Profile() {
   const auth = getAuth();
+  const [loading, setLoading] = useState(true);
+  const [listings, setListings] = useState(null);
+  const [changeDetails, setChangeDetails] = useState(false);
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
   });
-  const [changeDetails, setChangeDetails] = useState(false);
 
   const { name, email } = formData;
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchListings = async () => {
+    const fetchUserListings = async () => {
       const listingsRef = collection(db, "listings");
       const q = query(
         listingsRef,
@@ -37,9 +39,22 @@ function Profile() {
         orderBy("timestamp", "desc")
       );
 
-      const querySnap = await getDoc(q);
+      const querySnap = await getDocs(q);
+
+      const listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings(listings);
+      setLoading(false);
     };
-    fetchListings();
+
+    fetchUserListings();
   }, [auth.currentUser.uid]);
 
   const handleLogout = () => {

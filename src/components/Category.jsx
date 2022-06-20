@@ -32,7 +32,7 @@ function Category() {
           listingsRef,
           where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
-          limit(10)
+          limit(2)
         );
 
         // Execute query
@@ -42,7 +42,7 @@ function Category() {
         setLastFetchedListing(lastVisible);
 
         // Hide the button if no more listings to load
-        if (querySnap.docs.length <= q._query.C.limit) {
+        if (querySnap.docs.length < q._query.C.limit) {
           setLoadMoreButton(false);
         }
 

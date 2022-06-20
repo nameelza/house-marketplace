@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
-import { updateDoc, doc } from "firebase/firestore";
+import {
+  updateDoc,
+  doc,
+  collection,
+  getDoc,
+  query,
+  where,
+  oredeBy,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import arrowRight from "../assets/svg/keyboardArrowRightIcon.svg";
@@ -18,6 +27,10 @@ function Profile() {
   const { name, email } = formData;
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+  }, [auth.currentUser.uid])
 
   const handleLogout = () => {
     auth.signOut();

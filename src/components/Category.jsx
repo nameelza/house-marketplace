@@ -32,7 +32,7 @@ function Category() {
           listingsRef,
           where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
-          limit(2)
+          limit(10)
         );
 
         // Execute query
@@ -41,7 +41,7 @@ function Category() {
         const lastVisible = querySnap.docs[querySnap.docs.length - 1];
         setLastFetchedListing(lastVisible);
 
-        // Hide the button if no more listings
+        // Hide the button if no more listings to load
         if (querySnap.docs.length <= q._query.C.limit) {
           setLoadMoreButton(false);
         }
@@ -85,7 +85,7 @@ function Category() {
       const lastVisible = querySnap.docs[querySnap.docs.length - 1];
       setLastFetchedListing(lastVisible);
 
-      // Hide the button if no more listings
+      // Hide the button if no more listings to load
       if (querySnap.docs.length < q._query.C.limit) {
         setLoadMoreButton(false);
       }

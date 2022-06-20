@@ -6,6 +6,7 @@ import {
   where,
   orderBy,
   limit,
+  startAfter,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
@@ -15,6 +16,8 @@ import ListingItem from "./ListingItem";
 function Offers() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lastFetchedListing, setLastFetchedListing] = useState(null);
+  const [loadMoreButton, setLoadMoreButton] = useState(true);
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -32,6 +35,14 @@ function Offers() {
 
         // Execute query
         const querySnap = await getDocs(q);
+
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchedListing(lastVisible);
+
+        // Hide the button if no more listings
+        if (querySnap.docs.length <= q._query.C.limit) {
+          setLoadMoreButton(false);
+        }
 
         const listings = [];
 

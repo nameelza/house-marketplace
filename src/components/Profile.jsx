@@ -8,7 +8,7 @@ import {
   getDoc,
   query,
   where,
-  oredeBy,
+  orderBy,
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
@@ -29,8 +29,18 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchListings = async () => {
+      const listingsRef = collection(db, "listings");
+      const q = query(
+        listingsRef,
+        where("userRef", "==", auth.currentUser.uid),
+        orderBy("timestamp", "desc")
+      );
 
-  }, [auth.currentUser.uid])
+      const querySnap = await getDoc(q);
+    };
+    fetchListings();
+  }, [auth.currentUser.uid]);
 
   const handleLogout = () => {
     auth.signOut();

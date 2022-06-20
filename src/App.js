@@ -12,6 +12,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import ForgotPassword from "./components/ForgotPassword";
 import CreateListing from "./components/CreateListing";
+import EditListing from "./components/EditListing";
 import Contact from "./components/Contact";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/create-listing" element={<CreateListing />} />
+          <Route path="/edit-listing/:listingId" element={<EditListing />} />
           <Route path="/contact/:landlordId" element={<Contact />} />
         </Routes>
         <Navbar />

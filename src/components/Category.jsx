@@ -18,7 +18,7 @@ function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastFetchedListing, setLastFetchedListing] = useState(null);
-
+  const [loadMoreButton, setLoadMoreButton] = useState(true);
   const params = useParams();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function Category() {
           listingsRef,
           where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
-          limit(10)
+          limit(2)
         );
 
         // Execute query
@@ -40,6 +40,11 @@ function Category() {
 
         const lastVisible = querySnap.docs[querySnap.docs.length - 1];
         setLastFetchedListing(lastVisible);
+
+        // Hide the button if no more listings
+        if (querySnap.docs.length <= q._query.C.limit) {
+          setLoadMoreButton(false);
+        }
 
         const listings = [];
 
@@ -70,6 +75,7 @@ function Category() {
         listingsRef,
         where("type", "==", params.categoryName),
         orderBy("timestamp", "desc"),
+        startAfter(lastFetchedListing),
         limit(10)
       );
 
@@ -78,6 +84,11 @@ function Category() {
 
       const lastVisible = querySnap.docs[querySnap.docs.length - 1];
       setLastFetchedListing(lastVisible);
+
+      // Hide the button if no more listings
+      if (querySnap.docs.length < q._query.C.limit) {
+        setLoadMoreButton(false);
+      }
 
       const listings = [];
 
@@ -88,7 +99,7 @@ function Category() {
         });
       });
 
-      setListings(listings);
+      setListings((prevState) => [...prevState, ...listings]);
       setLoading(false);
     } catch (error) {
       toast.error("Could not fetch listings");
@@ -115,6 +126,11 @@ function Category() {
                 />
               ))}
             </ul>
+            {lastFetchedListing && loadMoreButton && (
+              <p className="loadMore" onClick={onFetchMoreListings}>
+                Load more
+              </p>
+            )}
           </main>
         </>
       ) : (

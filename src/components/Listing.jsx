@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MapContainer, Popup, Marker, TileLayer } from "react-leaflet";
 import { Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,8 +15,6 @@ function Listing() {
   const [loading, setLoading] = useState(true);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate();
   const params = useParams();
   const auth = getAuth();
 

@@ -381,7 +381,6 @@ function CreateListing() {
 
           <label className="formLabel">Images</label>
           <p>The first image will be the cover (max 6)</p>
-          <p>Max image size 2mb</p>
           <input
             className="formInputFile"
             type="file"

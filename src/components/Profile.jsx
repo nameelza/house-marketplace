@@ -99,6 +99,10 @@ function Profile() {
     }
   };
 
+  const onEdit = (listingId) => {
+    navigate(`/edit-listing/${listingId}`);
+  };
+
   return (
     <div className="profile">
       <header className="profileHeader">
@@ -158,6 +162,8 @@ function Profile() {
                   key={listing.id}
                   listing={listing.data}
                   id={listing.id}
+                  // ASK DENIS!!!!!!!!
+                  onEdit={onEdit}
                   onDelete={() => onDelete(listing.id)}
                 />
               ))}

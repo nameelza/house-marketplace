@@ -64,6 +64,7 @@ function Listing() {
       </div>
 
       {shareLinkCopied && <p className="linkCopied">Link Copied!</p>}
+
       <div className="listingDetails">
         <p className="listingName">
           {listing.name} - $
@@ -74,6 +75,7 @@ function Listing() {
             : listing.regularPrice
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            {listing.type === "rent" && " / month"}
         </p>
         <p className="listingLocation">{listing.location}</p>
         <p className="listingType">

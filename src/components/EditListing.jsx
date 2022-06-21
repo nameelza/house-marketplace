@@ -69,7 +69,7 @@ function EditListing() {
       }
     };
     fetchListings();
-  }, []);
+  }, [params.listingId, navigate]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {

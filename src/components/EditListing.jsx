@@ -15,7 +15,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import Spinner from "./Spinner";
@@ -53,6 +53,23 @@ function EditListing() {
 
   const auth = getAuth();
   const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchListings = async () => {
+      const docRef = doc(db, "listings", params.listingId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setListing(docSnap.data());
+        setLoading(false);
+      } else {
+        navigate("/");
+        toast.error("Listing does not exist");
+      }
+    };
+    fetchListings();
+  }, []);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {

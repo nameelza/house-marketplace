@@ -10,8 +10,6 @@ import {
   doc,
   updateDoc,
   getDoc,
-  addDoc,
-  collection,
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
@@ -55,6 +53,15 @@ function EditListing() {
   const navigate = useNavigate();
   const params = useParams();
 
+  //   Redirect if listing is not user's
+  useEffect(() => {
+    if (listing && auth.currentUser.uid !== listing.userRef) {
+      toast.error("you cannot edit this listing");
+      navigate("/");
+    }
+  }, []);
+
+  // Fetch listing to edit
   useEffect(() => {
     setLoading(true);
     const fetchListings = async () => {
@@ -62,6 +69,7 @@ function EditListing() {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setListing(docSnap.data());
+        setFormData({ ...docSnap.data(), address: docSnap.data().location });
         setLoading(false);
       } else {
         navigate("/");
@@ -71,6 +79,7 @@ function EditListing() {
     fetchListings();
   }, [params.listingId, navigate]);
 
+  // Sets userRef to logged in user
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -182,7 +191,10 @@ function EditListing() {
     delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
-    const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+    // Update listing
+    const docRef = doc(db, "listings", params.listingId);
+    await updateDoc(docRef, formDataCopy);
+
     setLoading(false);
     toast.success("Listing created");
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);

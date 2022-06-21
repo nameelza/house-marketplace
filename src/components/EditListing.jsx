@@ -6,12 +6,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import {
-  doc,
-  updateDoc,
-  getDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { doc, updateDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -53,14 +48,6 @@ function EditListing() {
   const navigate = useNavigate();
   const params = useParams();
 
-  //   Redirect if listing is not user's
-  useEffect(() => {
-    if (listing && auth.currentUser.uid !== listing.userRef) {
-      toast.error("you cannot edit this listing");
-      navigate("/");
-    }
-  }, []);
-
   // Fetch listing to edit
   useEffect(() => {
     setLoading(true);
@@ -78,6 +65,15 @@ function EditListing() {
     };
     fetchListings();
   }, [params.listingId, navigate]);
+
+  //   Redirect if listing is not user's
+  useEffect(() => {
+    console.log("check");
+    if (listing && auth.currentUser.uid !== listing.userRef) {
+      toast.error("you cannot edit this listing");
+      navigate("/");
+    }
+  }, [auth.currentUser.uid, listing, navigate]);
 
   // Sets userRef to logged in user
   useEffect(() => {

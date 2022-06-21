@@ -422,7 +422,7 @@ button {
 }
 @media (min-width: 1024px) {
   .categoryListingImg {
-    width: 19%;
+    width: 30%;
     height: 217px;
   }
 }
@@ -432,7 +432,7 @@ button {
 }
 @media (min-width: 1024px) {
   .categoryListingDetails {
-    width: 79%;
+    width: 68%;
   }
 }
 

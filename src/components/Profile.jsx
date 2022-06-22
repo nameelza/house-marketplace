@@ -88,7 +88,7 @@ function Profile() {
     }));
   };
 
-  const onDelete = async (listingId) => {
+  const onDelete = async ({listingId}) => {
     if (window.confirm("Are you sure you want to delete?")) {
       await deleteDoc(doc(db, "listings", listingId));
       const updatedListings = listings.filter(
@@ -99,7 +99,7 @@ function Profile() {
     }
   };
 
-  const onEdit = (listingId) => {
+  const onEdit = ({ listingId }) => {
     navigate(`/edit-listing/${listingId}`);
   };
 
@@ -162,9 +162,8 @@ function Profile() {
                   key={listing.id}
                   listing={listing.data}
                   id={listing.id}
-                  // ASK DENIS!!!!!!!!
                   onEdit={onEdit}
-                  onDelete={() => onDelete(listing.id)}
+                  onDelete={onDelete}
                 />
               ))}
             </ul>

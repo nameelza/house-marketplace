@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import arrowRight from "../assets/svg/keyboardArrowRightIcon.svg";
 import homeIcon from "../assets/svg/homeIcon.svg";
 import ListingItem from "./ListingItem";
+import Spinner from "./Spinner";
 
 function Profile() {
   const auth = getAuth();
@@ -88,7 +89,7 @@ function Profile() {
     }));
   };
 
-  const onDelete = async ({listingId}) => {
+  const onDelete = async ({ listingId }) => {
     if (window.confirm("Are you sure you want to delete?")) {
       await deleteDoc(doc(db, "listings", listingId));
       const updatedListings = listings.filter(
@@ -153,7 +154,7 @@ function Profile() {
           <img src={arrowRight} alt="arrow right" />
         </Link>
 
-        {!loading && listings?.length > 0 && (
+        {!loading && listings?.length > 0 ? (
           <>
             <p className="listingText">Your Listings</p>
             <ul className="listingsList">
@@ -168,6 +169,8 @@ function Profile() {
               ))}
             </ul>
           </>
+        ) : (
+          <Spinner />
         )}
       </main>
     </div>

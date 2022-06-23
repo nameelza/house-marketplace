@@ -15,6 +15,7 @@ import Spinner from "./Spinner";
 
 function EditListing() {
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [listing, setListing] = useState(false);
   const [formData, setFormData] = useState({
     type: "rent",
@@ -47,14 +48,24 @@ function EditListing() {
   const auth = getAuth();
   const navigate = useNavigate();
   const params = useParams();
-
+  console.log("lizs");
   // Fetch listing to edit
   useEffect(() => {
+    let isMounted = false;
+
     setLoading(true);
     const fetchListings = async () => {
       const docRef = doc(db, "listings", params.listingId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
+        if (
+          auth.currentUser?.uid &&
+          auth.currentUser?.uid !== docSnap.data().userRef &&
+          isMounted
+        ) {
+          toast.error("you cannot edit this listing");
+          navigate("/");
+        }
         setListing(docSnap.data());
         setFormData({ ...docSnap.data(), address: docSnap.data().location });
         setLoading(false);
@@ -64,15 +75,12 @@ function EditListing() {
       }
     };
     fetchListings();
-  }, [params.listingId, navigate]);
 
-  //   Redirect if listing is not user's
-  useEffect(() => {
-    if (listing && auth.currentUser.uid !== listing.userRef) {
-      toast.error("you cannot edit this listing");
-      navigate("/");
-    }
-  }, [auth.currentUser.uid, listing, navigate]);
+    return () => {
+      isMounted = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run only on mount
+  }, []);
 
   // Sets userRef to logged in user
   useEffect(() => {
